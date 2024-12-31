@@ -1,0 +1,44 @@
+<div
+  class="container"
+  style="background: linear-gradient(to right, #f0ffff, #a0c0ff)"
+  class="maindiv"
+>
+  <div class="row">
+    <div class="col-md-12 d-flex justify-content-center">
+      <div class="w-50">
+        <form [formGroup]="todoForm" (ngSubmit)="addTodo()">
+          <div class="input-group inp">
+            <input
+              type="text"
+              formControlName="task"
+              placeholder="Enter a todo"
+              class="form-control"
+            />
+            <button type="submit" class="btn btn-success">AddTodo</button>
+          </div>
+        </form>
+        <ul class="list-group">
+          <!-- looping through the todos array -->
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center"
+            *ngFor="let todo of todos; let i = index"
+          >
+            <!-- if the task is completed then strikethrough is applied when complete button is clicked -->
+            <span [ngClass]="{ 'text-decoration-line-through': todo.complete }">
+              <button (click)="taskCompletion(i)">
+                <input type="checkbox" />
+              </button>
+              {{ todo.name }}
+            </span>
+            <!-- button for the deleting the todo -->
+            <div>
+              <button class="btn btn-sm btn-danger" (click)="deleteTodo(i)">
+                Delete
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
